@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import ProfileContainer from './ProfileContainer';
+import React,{ Component } from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import './App.css';
+const url = "https://reqres.in/api/users";
+
+export default class App extends Component {
+  
+    constructor(){
+        super()
+        this.state = {
+           
+        };
+    }
+
+  async componentDidMount() {
+    console.log("thisMethodCalled")
+    const res = await fetch(url);
+    const resJSON = await res.json();
+    this.setState(userData, resJSON.data)
+  }
+
+  render() {
+    return (
+      <>
+        {
+          userData.map((user) => {
+            return <ProfileContainer currUserData={user} />
+          })
+        }
+      </>
+    )
+  }
 }
 
-export default App;
